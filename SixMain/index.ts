@@ -43,11 +43,14 @@ const httpTrigger: AzureFunction = async function(
   const bluechipsResponse = await fetch(bluechipsUrl);
   const bluechips = await bluechipsResponse.json();
 
-  const combined = [...smcap, ...bluechips];
+  await fetch(integrateUrl, {
+    method: "POST",
+    body: JSON.stringify(smcap)
+  });
 
   await fetch(integrateUrl, {
     method: "POST",
-    body: JSON.stringify(combined)
+    body: JSON.stringify(bluechips)
   });
 
   context.res = {
