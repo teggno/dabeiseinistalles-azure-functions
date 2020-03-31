@@ -1,0 +1,22 @@
+{
+  "name": "AzFn",
+  "version": "1.0.0",
+  "description": "Azure functions based ETL for dabeiseinistalles",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "private": true,
+  "dependencies": {
+    "log-stdout": "^1.1.2",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "@azure/functions": "^1.0.2-beta2",
+    "@types/node-fetch": "^2.5.5",
+    "typescript": "^3.3.3"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": ["post"]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "blob",
+      "direction": "out",
+      "name": "pricesJsonOut",
+      "path": "data/pricesV2.json",
+      "connection": "dabeiseinistalles_STORAGE"
+    },
+    {
+      "type": "blob",
+      "direction": "in",
+      "name": "pricesJsonIn",
+      "path": "data/pricesV2.json",
+      "connection": "dabeiseinistalles_STORAGE"
+    }
+  ],
+  "scriptFile": "../dist/SixIntegrate/index.js"
+}
