@@ -27,7 +27,7 @@ function parseLine(line: string): Stock {
     isin: parts[1],
     valorSymbol: parts[2],
     closingPrice: parseFloat(parts[4]),
-    lastDate: parts[7]
+    lastDate: parts[7],
   };
 }
 
@@ -53,13 +53,13 @@ function parse(csv: string, lineParser: (line: string) => Stock) {
   const result = {
     columnHeaders: null as string | null,
     prices: [] as Stock[],
-    producedAt: null as string | null
+    producedAt: null as string | null,
   };
   csv.split("\n").forEach((line, i) => {
     if (i === 0) {
       result.columnHeaders = line;
     } else if (line.startsWith("Produced at:")) {
-      result.producedAt = new Date(line.substr(13)).toISOString();
+      result.producedAt = parseProducedAt(line.substr(13)).toISOString();
     } else {
       if (line.indexOf(";") !== -1) {
         result.prices.push(lineParser(line));
@@ -70,4 +70,13 @@ function parse(csv: string, lineParser: (line: string) => Stock) {
   return result.columnHeaders && result.producedAt && result.prices.length > 0
     ? (result as SixContents)
     : null;
+}
+
+/**
+ *
+ * @param producedAt E.g. "18:35:02 2020-04-03"
+ */
+function parseProducedAt(producedAt: string) {
+  const [timeStr, dateStr] = producedAt.split(" ");
+  return new Date(dateStr + "T" + timeStr + "+02:00"); // +02:00 because the file is produced in CH
 }
