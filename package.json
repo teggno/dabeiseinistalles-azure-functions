@@ -16,7 +16,7 @@
   "private": true,
   "dependencies": {
     "log-stdout": "^1.1.2",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@azure/functions": "^1.0.2-beta2",
